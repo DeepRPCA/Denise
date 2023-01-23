@@ -1,3 +1,7 @@
+# Denise
+
+[![DOI](https://zenodo.org/badge/367672358.svg)](https://zenodo.org/badge/latestdoi/367672358)
+
 ## Installation
 
 To install the necessary python dependencies:
