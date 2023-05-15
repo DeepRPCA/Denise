@@ -1,3 +1,5 @@
+
+
 import pandas as pd
 import os
 
@@ -40,3 +42,5 @@ def get_csv(
 if __name__ == '__main__':
     get_csv(dist="normal0")
     get_csv(dist="student2")
+
+

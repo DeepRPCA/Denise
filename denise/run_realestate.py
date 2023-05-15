@@ -1,6 +1,5 @@
 """Runs baseline algorithms over real-estate input matrix and generates images.
 
-source /home/calypso/work/research/current/denise/code_src/setup_env.sh
 export LD_PRELOAD=/usr/local/MATLAB/R2018b/sys/os/glnxa64/libstdc++.so.6.0.22
 python3.6 run_realestate.py
 

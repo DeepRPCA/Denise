@@ -14,7 +14,7 @@ import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 
-_CITATION = """"""
+_CITATION = """https://openreview.net/forum?id=D45gGvUZp2"""
 _DESCRIPTION = """Market correlation matrices dataset."""
 
 _SIZE = 1000

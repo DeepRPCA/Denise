@@ -12,9 +12,9 @@ import math
 
 from absl import app
 from absl import flags
-from lsr import data
-from lsr import positive_semidefinite_matrices  # pylint: disable=unused-import
-from lsr.script_prepare_datasets import DIR
+from denise import data
+from denise import positive_semidefinite_matrices  # pylint: disable=unused-import
+from denise.script_prepare_datasets import DIR
 import matplotlib
 matplotlib.use("Agg")
 # pylint: disable=g-import-not-at-top
@@ -64,14 +64,7 @@ _ALGOS = [
     ("IALM", "ialm"),
     ("FPCP", "fpcp"),
     ("RPCA-GD", "rpcagd"),
-    # ("AccAltProj", "accaltproj"),
-    # ("Semi-NMF", "seminmf"),
-    # ("Deep-Semi-NMF", "deepseminmf"),
-    # ("Sym-NMF", "symnmf_anls"),
     ("Denise", "dnn_topo0"),
-    # ("DeniseS", "dnn_topo0_shrink"),
-    # ("DNN reservoir", "dnn_topo0_reservoir"),
-    # ("Denise reservoir", "dnn_topo0_reservoir_shrink"),
 ]
 
 
@@ -223,8 +216,8 @@ def draw_comparison_images(N, K, forced_rank, sparsity, l0_available, dist=None)
   plot_comparisons.export_images(comparison_path)
 
 
-_PDF_METRIC_CELL = r"{:.2f}$\pm${:.2f}"
-_PDF_METRIC_CELL_T = r"{:.2f}$\pm${:.2f}"
+_PDF_METRIC_CELL = r"{:.2f} ({:.2f})"
+_PDF_METRIC_CELL_T = r"{:.2f} ({:.2f})"
 # "duration_s" is hardcoded
 _PDF_METRICS = ["rankL", "sparsityS"]
 _PDF_METRICS_L0_AVAILABLE = ["RE_L", "RE_S"]  # , "RE_M"]

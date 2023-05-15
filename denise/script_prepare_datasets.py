@@ -1,20 +1,17 @@
 """Script to prepare the synthetic and real datasets."""
 import tensorflow_datasets as tfds
 
-import socket
+import socket, os
 
 from absl import app
 from absl import flags
-from lsr import market_matrices  # py-lint: disable=unused-import
-from lsr import positive_semidefinite_matrices  # py-lint: disable=unused-import
+from denise import market_matrices  # py-lint: disable=unused-import
+from denise import positive_semidefinite_matrices  # py-lint: disable=unused-import
 
-if 'ada-' not in socket.gethostname():
-    DIR = "~/tensorflow_datasets"
-else:
-    DIR = "/userdata/fkrach/Projects/denise/code_src/data"
+DIR = os.path.normpath(os.path.join(os.path.dirname(__file__), '../data'))
 
 
-flags.DEFINE_bool("market", True, "Generate market dataset.")
+flags.DEFINE_bool("market", False, "Generate market dataset.")
 
 flags.DEFINE_bool(
     "synthetic", False,

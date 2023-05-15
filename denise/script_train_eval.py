@@ -5,11 +5,11 @@ import sys
 
 from absl import app
 from absl import flags
-from lsr import algo_tf
-from lsr import evaluation
-from lsr import market_matrices  # pylint: disable=unused-import
-from lsr import positive_semidefinite_matrices  # pylint: disable=unused-import
-from lsr.script_prepare_datasets import DIR
+from denise import algo_tf
+from denise import evaluation
+from denise import market_matrices  # pylint: disable=unused-import
+from denise import positive_semidefinite_matrices  # pylint: disable=unused-import
+from denise.script_prepare_datasets import DIR
 import tensorflow_datasets as tfds
 import tensorflow as tf
 
@@ -24,6 +24,7 @@ flags.DEFINE_bool("shrink", True, "Should we shrink while training / eval?")
 
 # Training only:
 flags.DEFINE_integer("batch_size", 1024, "Batch size (for training).")
+flags.DEFINE_integer("nb_epochs", 100, "epochs (for training).")
 flags.DEFINE_float("learning_rate", 1e-3, "Learing rate (training).")
 flags.DEFINE_float(
     "eps_nn", 1e-6,
@@ -91,6 +92,7 @@ def main(argv):
         FLAGS.eps_nn,
         builder.info.splits["train"].num_examples,
         shrink=FLAGS.shrink,
+        epochs=FLAGS.nb_epochs,
         )
   elif action == "eval":
     print("Evaluate %s" % ds_name)

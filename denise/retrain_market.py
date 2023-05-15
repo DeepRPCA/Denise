@@ -1,16 +1,17 @@
 """Retrain already trained models on market data"""
 import sys
 import shutil
+import time
 
 from absl import app
 from absl import flags
-from lsr import algo_tf
-from lsr import evaluation
-from lsr import market_matrices  # pylint: disable=unused-import
-from lsr import positive_semidefinite_matrices  # pylint: disable=unused-import
-from lsr import model_lib_tf
-from lsr import evaluation
-from lsr.script_prepare_datasets import DIR
+from denise import algo_tf
+from denise import evaluation
+from denise import market_matrices  # pylint: disable=unused-import
+from denise import positive_semidefinite_matrices  # pylint: disable=unused-import
+from denise import model_lib_tf
+from denise import evaluation
+from denise.script_prepare_datasets import DIR
 import tensorflow_datasets as tfds
 import tensorflow as tf
 from tensorflow import keras as k
@@ -108,11 +109,11 @@ def retrain(argv):
     training_ds = training_ds.batch(FLAGS.batch_size)
     print("training dataset", training_ds)
     n = builder.info.splits["train"].num_examples
-    steps_per_epoch = n // FLAGS.batch_size
+    steps_per_epoch = max(1, n // FLAGS.batch_size)
     print('size:', n, 'steps per epoch:', steps_per_epoch)
 
     n_val = builder.info.splits["validation"].num_examples
-    steps_per_epoch_val = n_val // FLAGS.batch_size
+    steps_per_epoch_val = max(1, n_val // FLAGS.batch_size)
     val_ds = val_ds.batch(FLAGS.batch_size)
     print("validation dataset", val_ds)
     print('size:', n_val, 'steps per epoch:', steps_per_epoch_val)
@@ -125,19 +126,24 @@ def retrain(argv):
     print(eval_losses)
 
     # retrain
+    t = time.time()
     history = model.fit(
         x=training_ds, epochs=FLAGS.epochs, callbacks=callbacks,
         steps_per_epoch=steps_per_epoch, validation_data=val_ds,
         validation_steps=steps_per_epoch_val)
+
+    print("training time:", time.time() - t)
     
     history = history.history
     ind = np.argmin(history["L_ML_metric"])
+    print("minimising index:", ind)
     print("minimal L_ML_metric (on train set): {}".format(history["L_ML_metric"][ind]))
     print("validation errors at minimal training ML-reconstruction loss:")
     print("val_S_sparsity_metric: {}, val_L_ML_metric: {}".format(
         history["val_S_sparsity_metric"][ind], history["val_L_ML_metric"][ind]))
     
     ind = np.argmax(history["S_sparsity_metric"])
+    print("minimising index:", ind)
     print("max S_sparsity_metric (on train set): {}".format(history["S_sparsity_metric"][ind]))
     print("validation errors at max training S_sparsity_metric:")
     print("val_S_sparsity_metric: {}, val_L_ML_metric: {}".format(

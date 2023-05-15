@@ -40,3 +40,5 @@ if __name__ == '__main__':
 
     with open("../../latex_src/Tables.tex", "w") as tex:
         tex.write(pdf_tex)
+
+

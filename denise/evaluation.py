@@ -15,7 +15,7 @@ import math
 import time
 
 from absl import flags
-from lsr import data
+from denise import data
 import numpy as np
 import tensorflow.compat.v1 as tf
 
@@ -163,8 +163,6 @@ def run_eval(
   data.save_np_arr(L, path_l)
   data.save_np_arr(S, path_s)
 
-  # TODO: shrinkkage is therefore applied twice for Denise and FPCP ... !?
-  # shrink matrices, to have a fair comparison with FPCP and Denise.
   if FLAGS.shrink:
     for S_sample in S:
       S_sample[np.abs(S_sample) < (1 / math.sqrt(20))] = 0.

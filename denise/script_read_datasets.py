@@ -3,8 +3,8 @@ import tensorflow_datasets as tfds
 
 from absl import app
 from absl import flags
-from lsr import market_matrices  # py-lint: disable=unused-import
-from lsr import positive_semidefinite_matrices  # py-lint: disable=unused-import
+from denise import market_matrices  # py-lint: disable=unused-import
+from denise import positive_semidefinite_matrices  # py-lint: disable=unused-import
 
 flags.DEFINE_bool(
     "synthetic", False,

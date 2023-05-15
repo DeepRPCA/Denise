@@ -10,7 +10,7 @@ import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_CITATION = """"""
+_CITATION = """https://openreview.net/forum?id=D45gGvUZp2"""
 _DESCRIPTION = """Low + sparse matrix decomposition dataset."""
 
 
@@ -206,6 +206,8 @@ class PositiveSemidefiniteMatrices(tfds.core.GeneratorBasedBuilder):
 
       PositiveSemidefiniteMatricesConfig(size_n=40, sparsity=0.95, rank=3),
       PositiveSemidefiniteMatricesConfig(size_n=80, sparsity=0.95, rank=3),
+
+      PositiveSemidefiniteMatricesConfig(size_n=100, sparsity=0.95, rank=10),
   ]
 
   def _info(self):
@@ -264,6 +266,24 @@ class PositiveSemidefiniteMatrices(tfds.core.GeneratorBasedBuilder):
       #     _get_sparsity(s, tolerance=0), _get_sparsity(s, tolerance=0.22)))
       # raise AssertionError
       yield i, {"L": l, "S": s}
+
+
+class PositiveSemidefiniteMatricesLarge(PositiveSemidefiniteMatrices):
+  """Same as PositiveSemidefiniteMatrices, but using less train samples."""
+
+  def _split_generators(self, dl_manager):
+      """Returns SplitGenerators."""
+      return [
+          tfds.core.SplitGenerator(
+              name=tfds.Split.TRAIN,
+              gen_kwargs={"seed": 4242, "num_matrices": int(1e5)},
+          ),
+          tfds.core.SplitGenerator(
+              name=tfds.Split.VALIDATION,
+              gen_kwargs={"seed": 4243, "num_matrices": int(_EVAL_SIZE/10)},
+          ),
+      ]
+
 
 
 class PositiveSemidefiniteMatricesLUniform(PositiveSemidefiniteMatrices):
@@ -434,3 +454,5 @@ class PositiveSemidefiniteMatricesLStudent2(PositiveSemidefiniteMatrices):
             gen_kwargs={"seed": 4244, "num_matrices": _EVAL_SIZE},
         ),
     ]
+
+

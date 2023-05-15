@@ -5,7 +5,7 @@ from absl import flags
 import tensorflow as tf
 from tensorflow import keras as k
 
-from lsr import model_lib_tf
+from denise import model_lib_tf
 
 FLAGS = flags.FLAGS
 
@@ -80,7 +80,7 @@ def train(
     n,
     shrink=False,
     model=None,
-    epochs=100,
+    epochs=150,
     reservoir=False,
     ):
   """

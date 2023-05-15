@@ -8,11 +8,11 @@ from __future__ import print_function
 
 from absl import app
 from absl import flags
-from lsr import baselines
-from lsr import evaluation
-from lsr import positive_semidefinite_matrices  # pylint: disable=unused-import
-from lsr import market_matrices  # pylint: disable=unused-import
-from lsr.script_prepare_datasets import DIR
+from denise import baselines
+from denise import evaluation
+from denise import positive_semidefinite_matrices  # pylint: disable=unused-import
+from denise import market_matrices  # pylint: disable=unused-import
+from denise.script_prepare_datasets import DIR
 import matlab
 import numpy as np
 import tensorflow_datasets as tfds

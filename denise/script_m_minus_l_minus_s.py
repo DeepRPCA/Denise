@@ -10,8 +10,8 @@ from absl import app
 import numpy as np
 import tensorflow_datasets as tfds
 
-from lsr import market_matrices  # pylint: disable=unused-import
-from lsr import script_draw_comparison_images
+from denise import market_matrices  # pylint: disable=unused-import
+from denise import script_draw_comparison_images
 
 FLAGS = flags.FLAGS
 
