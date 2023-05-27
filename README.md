@@ -311,12 +311,14 @@ please cite our paper:
 [Denise: Deep Robust Principal Component Analysis for Positive Semidefinite Matrices](https://openreview.net/forum?id=D45gGvUZp2)
 
 ```
-@misc{herrera2021denise,
-      title={Denise: Deep Robust Principal Component Analysis for Positive Semidefinite Matrices}, 
-      author={Calypso Herrera and Florian Krach and Anastasis Kratsios and Pierre Ruyssen and Josef Teichmann},
-      year={2021},
-      eprint={2004.13612},
-      archivePrefix={arXiv},
-      primaryClass={stat.ML}
+@article{
+herrera2023denise,
+title={Denise: Deep Robust Principal Component Analysis for Positive Semidefinite Matrices},
+author={Calypso Herrera and Florian Krach and Anastasis Kratsios and Pierre Ruyssen and Josef Teichmann},
+journal={Transactions on Machine Learning Research},
+issn={2835-8856},
+year={2023},
+url={https://openreview.net/forum?id=D45gGvUZp2},
+note={}
 }
 ```
